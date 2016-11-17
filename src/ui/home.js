@@ -27,39 +27,36 @@ export default React.createClass({
 		this.unsubscribe()
 	},
 
-	// placeholder: function() {
-	// 	return(
-	// 		{<i className="fa fa-user" aria-hidden="true"></i> + field.label}
-	// 	)
-	// },
-
   render: function() {  	
   	{var fields = this.state.fields}
     return (
       <div className="container">
 				<div className="header"><span className="header_text">Sign Up For My Web App</span></div>
 				<div className="body">
-					{fields.map(function(field, i) {
-						{console.log(field.type)}
+					{fields.map(function(field, i) {						
 						if(field.type === "select") {
 							return (
-								<div className="body_textarea_positionRelative">
+								<div key={"s" + i} className="body_textarea_positionRelative">
 									<select className="body_input body_select">
-										<option className="body_input">Select Language</option>
-										<option className="body_input">English</option>
+										<option className="body_input">{field.label}</option>
+										{field.options.map(function(label, i) {
+											return (
+												<option key={"o" + i}className="body_input">{label.label}</option>
+											)
+										})}
 									</select>
 								</div>
 							)
 						} else if(field.type === "textarea") {
 							return (
-								<div className="body_textarea_positionRelative">
+								<div key={"t" + i} className="body_textarea_positionRelative">
 									<i className={"fa " + field.icon} aria-hidden="true"></i>
 									<textarea className="body_input body_textarea" placeholder={field.label}></textarea> 
 								</div>
 							)
 						} else if (field.type === "text" || "email" || "tel") {
 							return (
-								<div>
+								<div key={"txt" + i}>
 									<i className={"fa " + field.icon} aria-hidden="true"></i>
 									<input 
 										key={"t" + i} 
@@ -82,7 +79,7 @@ export default React.createClass({
 });
 
 
-
+// {console.log("field.options", field.options)}
 // if (field.type === "text" || "email" || "tel")
 //<i className="fa fa-user" aria-hidden="true"></i>
 
